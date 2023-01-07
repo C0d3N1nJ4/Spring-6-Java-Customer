@@ -1,14 +1,13 @@
 package com.application.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/customers")
 public class CustomerController {
 
     @Autowired
@@ -18,9 +17,22 @@ public class CustomerController {
         this.customerRepository = customerRepository;
     }
 
-    @GetMapping("customers")
+    @GetMapping
+    @ResponseBody
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus
+    public Optional<Customer> getCustomerById(@PathVariable Integer id) {
+        return customerRepository.findById(id);
+}
+
+    @PostMapping
+    @ResponseBody
+    public Customer saveCustomer(@RequestBody Customer customer) {
+        return customerRepository.save(customer);
     }
 
 }
