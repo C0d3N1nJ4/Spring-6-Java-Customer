@@ -15,16 +15,11 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int id, String name, String lastname) {
+    public Customer(int id, String name, String lastname, String status) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
-    }
-
-    public Customer(int id, String name) {
-        this.id = id;
-        this.name = name;
-
+        this.status = status;
     }
 
     public int getId() {
@@ -49,6 +44,14 @@ public class Customer {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

@@ -34,9 +34,12 @@ public class CustomerController {
         } else {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
-
 }
-
+    @GetMapping("/filter/{status}")
+    @ResponseStatus
+    public List<Customer> getCustomerByStatus(@PathVariable("status") String status) {
+        return customerRepository.getCustomerByStatus(status);
+    }
     @PostMapping
     @ResponseBody
     public Customer saveCustomer(@RequestBody Customer customer) {
