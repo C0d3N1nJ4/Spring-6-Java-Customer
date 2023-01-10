@@ -1,8 +1,10 @@
 package com.application.customer;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +13,7 @@ import java.util.Optional;
 public class CustomerController {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
     public CustomerController(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
@@ -26,7 +28,13 @@ public class CustomerController {
     @GetMapping("/{id}")
     @ResponseStatus
     public Optional<Customer> getCustomerById(@PathVariable Integer id) {
-        return customerRepository.findById(id);
+        if (customerRepository.existsById(id)) {
+            Optional<Customer> result = customerRepository.findById(id);
+            return result;
+        } else {
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+        }
+
 }
 
     @PostMapping
