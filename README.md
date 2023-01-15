@@ -12,3 +12,6 @@ The following endpoints are available :
 
 https://localhost:8080/actuator
 
+#Security
+
+https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/in-memory.html
