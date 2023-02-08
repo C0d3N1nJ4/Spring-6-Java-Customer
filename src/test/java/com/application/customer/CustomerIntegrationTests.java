@@ -12,17 +12,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//@WebMvcTest(CustomerController.class)
 public class CustomerIntegrationTests {
 
-    //@Autowired
     private MockMvc mockMvc;
 
     @Autowired
@@ -60,9 +60,21 @@ public class CustomerIntegrationTests {
     @WithMockUser(value = "spring")
     @Test
     public void saveCustomer_StatusCREATED() throws Exception{
-        mockMvc.perform(post("/customers").contentType(MediaType.APPLICATION_JSON)
-                        .content("{ \"id\":\"6\", \"name\":\"NAMESIX\", \"lastname\":\"LASTNAMESIX\", \"status\": \"INACTIVE\"}"))
-                .andExpect(status().isCreated());
+
+        this.mockMvc.perform(post("/customers")
+                        .with(csrf().asHeader())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{ \"id\":5, \"name\":\"NAMEFIVE\", \"lastname\":\"LASTNAME\", \"status\": \"ACTIVE\"}"))
+                        .andExpect(status().isCreated())
+                        .andExpect(content().json("""
+                                {
+                                    "id": 5,
+                                    "name": "NAMEFIVE",
+                                    "lastname": "LASTNAME",
+                                    "status": "ACTIVE"
+                                }"""));
     }
+
+
 
 }
