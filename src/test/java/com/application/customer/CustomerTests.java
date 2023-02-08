@@ -15,4 +15,5 @@ public class CustomerTests {
     public List<Customer> getCustomers() {
         return customerRepository.findAll();
     }
+
 }
