@@ -41,13 +41,21 @@ public class CustomerIntegrationTests {
     public void getAllCustomersTest_StatusOK() throws Exception{
         mockMvc.perform(get("/customers").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+
     }
 
     @WithMockUser(value = "spring")
     @Test
     public void getCustomersByIdTest_StatusOK() throws Exception{
         mockMvc.perform(get("/customers/1").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                                {
+                                    "id": 1,
+                                    "name": "NAMEONE",
+                                    "lastname": "LASTNAME",
+                                    "status": "ACTIVE"
+                                }"""));
     }
 
     @WithMockUser(value = "spring")
