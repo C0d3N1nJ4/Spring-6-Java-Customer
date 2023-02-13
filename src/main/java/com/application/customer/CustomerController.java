@@ -3,8 +3,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
-
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +27,7 @@ public class CustomerController {
     @ResponseStatus
     public Optional<Customer> getCustomerById(@PathVariable Integer id) {
         if (customerRepository.existsById(id)) {
-            Optional<Customer> result = customerRepository.findById(id);
-            return result;
+            return customerRepository.findById(id);
         } else {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
@@ -40,10 +37,16 @@ public class CustomerController {
     public List<Customer> getCustomerByStatus(@PathVariable("status") String status) {
         return customerRepository.getCustomerByStatus(status);
     }
+
     @PostMapping
     @ResponseBody
     public Customer saveCustomer(@RequestBody Customer customer) {
         return customerRepository.save(customer);
     }
 
+    @GetMapping("/address/{address-id}")
+    @ResponseStatus
+    public Optional<Customer> getCustomerAddress(@PathVariable("address-id") String addressId) {
+        return customerRepository.findCustomerByAddress_Id(addressId);
+    }
 }
