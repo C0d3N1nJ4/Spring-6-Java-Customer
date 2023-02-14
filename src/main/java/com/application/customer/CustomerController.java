@@ -29,7 +29,6 @@ public class CustomerController {
     public Optional<Customer> getCustomerById(@PathVariable Integer id) {
         if (customerRepository.existsById(id)) {
             return customerRepository.findById(id);
-
         } else {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
@@ -39,6 +38,7 @@ public class CustomerController {
     public List<Customer> getCustomerByStatus(@PathVariable("status") String status) {
         return customerRepository.getCustomerByStatus(status);
     }
+
     @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
@@ -46,4 +46,9 @@ public class CustomerController {
         return customerRepository.save(customer);
     }
 
+    @GetMapping("/address/{address-id}")
+    @ResponseStatus
+    public Optional<Customer> getCustomerAddress(@PathVariable("address-id") String addressId) {
+        return customerRepository.findCustomerByAddress_Id(addressId);
+    }
 }
