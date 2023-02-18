@@ -19,12 +19,13 @@ public class CustomerController {
 
     @GetMapping
     @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus
+    @ResponseStatus(HttpStatus.OK)
     public Optional<Customer> getCustomerById(@PathVariable Integer id) {
         if (customerRepository.existsById(id)) {
             return customerRepository.findById(id);
@@ -33,19 +34,20 @@ public class CustomerController {
         }
 }
     @GetMapping("/filter/{status}")
-    @ResponseStatus
+    @ResponseStatus(HttpStatus.OK)
     public List<Customer> getCustomerByStatus(@PathVariable("status") String status) {
         return customerRepository.getCustomerByStatus(status);
     }
 
     @PostMapping
     @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
     public Customer saveCustomer(@RequestBody Customer customer) {
         return customerRepository.save(customer);
     }
 
     @GetMapping("/address/{address-id}")
-    @ResponseStatus
+    @ResponseStatus(HttpStatus.OK)
     public Optional<Customer> getCustomerAddress(@PathVariable("address-id") String addressId) {
         return customerRepository.findCustomerByAddress_Id(addressId);
     }

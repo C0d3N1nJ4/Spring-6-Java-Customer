@@ -19,7 +19,7 @@ public class AddressController {
     }
 
     @GetMapping("/{address-id}")
-    @ResponseStatus
+    @ResponseStatus(HttpStatus.OK)
     public Optional<Address> getAddressById(@PathVariable("address-id") String id) {
         if (addressRepository.existsById(id)) {
             return addressRepository.findById(id);
