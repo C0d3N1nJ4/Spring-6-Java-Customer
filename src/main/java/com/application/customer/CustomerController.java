@@ -24,7 +24,6 @@ public class CustomerController {
     @GetMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Retrieve all customers", responses = {
             @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class)))
     })
@@ -33,7 +32,6 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Retrieve a customer by it's id", responses = {
             @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class)))
@@ -47,7 +45,6 @@ public class CustomerController {
 }
     @GetMapping("/filter/{status}")
     @ResponseStatus(HttpStatus.OK)
-    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Retrieve a customer by status", responses = {
             @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class)))
     })
@@ -58,7 +55,6 @@ public class CustomerController {
     @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Create a new customer record", responses = {
             @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class)))
     })
