@@ -1,6 +1,7 @@
 package com.application.customer;
 
 import com.application.address.Address;
+import com.application.contact.Contact;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,15 +15,19 @@ public class Customer {
     @OneToOne
     private Address address;
 
+    @OneToOne
+    private Contact contact;
+
     public Customer() {
     }
 
-    public Customer(int id, String name, String lastname, String status, Address address) {
+    public Customer(int id, String name, String lastname, String status, Address address, Contact contact) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.status = status;
         this.address = address;
+        this.contact = contact;
     }
 
     public int getId() {
@@ -65,12 +70,11 @@ public class Customer {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastname='" + lastname + '\'' +
-                '}';
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 }
