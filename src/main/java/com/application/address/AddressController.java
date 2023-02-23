@@ -1,10 +1,13 @@
 package com.application.address;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
-
 import java.util.Optional;
 
 @RestController
@@ -19,7 +22,11 @@ public class AddressController {
     }
 
     @GetMapping("/{address-id}")
-    @ResponseStatus
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Retrieve an address by it's id", responses = {
+            @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Address.class)))
+    })
     public Optional<Address> getAddressById(@PathVariable("address-id") String id) {
         if (addressRepository.existsById(id)) {
             return addressRepository.findById(id);
