@@ -3,7 +3,6 @@ package com.application.customer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.List;
 
 @SpringBootTest
@@ -11,8 +10,30 @@ public class CustomerTests {
 
     @Autowired
     private CustomerRepository customerRepository;
+
     @Test
-    public List<Customer> getCustomers() {
-        return customerRepository.findAll();
+    public void verifyCustomerCount() {
+        List<Customer> customers = customerRepository.findAll();
+        assert customers.size() == 4;
     }
+
+    @Test
+    public void verifyCustomerStatusActive() {
+        List<Customer> customers = customerRepository.getCustomerByStatus("ACTIVE");
+        assert customers.size() == 2;
+    }
+
+    @Test
+    public void verifyCustomerStatusInactive() {
+        List<Customer> customers = customerRepository.getCustomerByStatus("INACTIVE");
+        assert customers.size() == 2;
+    }
+
+    @Test
+    public void testCustomerById() {
+        Customer customer = customerRepository.findById(1).get();
+        assert customer.getName().equals("NAMEONE");
+    }
+
+
 }
