@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 @Entity
 public class Customer {
     @Id
-    private int id;
+    private String id;
     private String name;
     private String lastname;
     private String status;
@@ -21,7 +21,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int id, String name, String lastname, String status, Address address, Contact contact) {
+    public Customer(String id, String name, String lastname, String status, Address address, Contact contact) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
@@ -30,11 +30,11 @@ public class Customer {
         this.contact = contact;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
