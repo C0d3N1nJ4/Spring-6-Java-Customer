@@ -11,11 +11,11 @@ This project aims to implement a simple Spring project that exposes an API with 
 # Actuator 
 The following endpoints are available for application monitoring :
 
-https://localhost:8080/actuator
+http://localhost:8080/actuator
 
 # Swagger 
 
-The swagger documentation is available at the following URL : https://localhost:8080/swagger-ui.html
+The swagger documentation is available at the following URL : http://localhost:8080/swagger-ui.html
 
 
 
