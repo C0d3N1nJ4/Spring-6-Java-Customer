@@ -1,11 +1,11 @@
 package com.application.customer;
 import com.application.exceptions.CustomerNotFoundException;
 import com.application.exceptions.StatusNotFoundException;
+import com.application.services.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
@@ -17,16 +17,19 @@ import java.util.Optional;
 @RequestMapping("/customers")
 public class CustomerController {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+    private final CustomerService customerService;
+
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @GetMapping
     @ResponseBody
     @Operation(summary = "Retrieve all customers", responses = {
             @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class)))
     })
-    public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
+    public Iterable<Customer> getAllCustomers() {
+        return customerService.findAll();
     }
 
     @GetMapping("/{id}")
@@ -34,9 +37,9 @@ public class CustomerController {
     @Operation(summary = "Retrieve a customer by it's id", responses = {
             @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class)))
     })
-    public Optional<Customer> getCustomerById(@PathVariable Integer id) {
-        if (customerRepository.existsById(id)) {
-            return customerRepository.findById(id);
+    public Optional<Customer> getCustomerById(@PathVariable int id) {
+        if (customerService.existsById(id)) {
+            return customerService.findById(id);
         } else {
             throw new CustomerNotFoundException(id);
         }
@@ -49,7 +52,7 @@ public class CustomerController {
         if (status == null) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
         } else if (status.equals("ACTIVE") || status.equals("INACTIVE")) {
-            return customerRepository.getCustomerByStatus(status);
+            return customerService.getCustomerByStatus(status);
         } else {
             throw new StatusNotFoundException(status);
         }
@@ -61,7 +64,7 @@ public class CustomerController {
             @ApiResponse(description = "Successful Operation", responseCode = "202", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class)))
     })
     public Customer saveCustomer(@RequestBody Customer customer) {
-        return customerRepository.save(customer);
+        return customerService.save(customer);
     }
 
     @GetMapping("/address/{address-id}")
@@ -70,7 +73,7 @@ public class CustomerController {
             @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class)))
     })
     public Optional<Customer> getCustomerAddress(@PathVariable("address-id") String addressId) {
-            return customerRepository.findCustomerByAddress_Id(addressId);
+            return customerService.findCustomerByAddress_Id(addressId);
     }
 
 }
