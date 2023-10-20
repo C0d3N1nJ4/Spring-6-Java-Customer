@@ -60,6 +60,7 @@ public class CustomerController {
 
     @PostMapping
     @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new customer record", responses = {
             @ApiResponse(description = "Successful Operation", responseCode = "202", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class)))
     })
