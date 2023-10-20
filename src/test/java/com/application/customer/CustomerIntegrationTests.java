@@ -10,6 +10,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -51,5 +53,21 @@ public class CustomerIntegrationTests {
     public void getCustomerByStatusTest_StatusBadRequest() throws Exception{
         mockMvc.perform(get("/customers/filter").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void saveCustomer_StatusCREATED() throws Exception{
+
+        this.mockMvc.perform(post("/customers")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{ \"id\":5, \"name\":\"NAMEFIVE\", \"lastname\":\"LASTNAME\", \"status\": \"ACTIVE\"}"))
+                .andExpect(status().isCreated())
+                .andExpect(content().json("""
+                                {
+                                    "id": 5,
+                                    "name": "NAMEFIVE",
+                                    "lastname": "LASTNAME",
+                                    "status": "ACTIVE"
+                                }"""));
     }
 }
