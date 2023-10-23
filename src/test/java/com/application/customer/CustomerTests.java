@@ -35,5 +35,11 @@ public class CustomerTests {
         assert customer.getName().equals("NAMEONE");
     }
 
+    @Test
+    public void testCustomerByIdNotFound() {
+        Customer customer = customerRepository.findById(5).orElse(null);
+        assert customer == null;
+    }
+
 
 }

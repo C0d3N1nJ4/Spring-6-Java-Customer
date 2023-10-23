@@ -26,8 +26,9 @@ public class AddressController {
             @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Address.class)))
     })
     public Optional<Address> getAddressById(@PathVariable("address-id") String id) {
-        if (addressRepository.existsById(id)) {
-            return addressRepository.findById(id);
+        var address = addressRepository.findById(id);
+        if (address.isPresent()) {
+            return address;
         } else {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
