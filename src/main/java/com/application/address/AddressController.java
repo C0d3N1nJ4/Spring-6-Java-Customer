@@ -26,7 +26,7 @@ public class AddressController {
     @Operation(summary = "Retrieve an address by it's id", responses = {
             @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Address.class)))
     })
-    public Optional<Address> getAddressById(@PathVariable("address-id") int id) {
+    public Optional<Address> getAddressById(@PathVariable("address-id") String id) {
         var address = addressService.findById(id);
         if (address.isPresent()) {
             return address;
