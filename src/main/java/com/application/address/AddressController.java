@@ -1,5 +1,6 @@
 package com.application.address;
 
+import com.application.services.AddressServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,10 +14,10 @@ import java.util.Optional;
 @RequestMapping("/address")
 public class AddressController {
 
-    private final AddressRepository addressRepository;
+    private final AddressServiceImpl addressService;
 
-    public AddressController(AddressRepository addressRepository) {
-        this.addressRepository = addressRepository;
+    public AddressController(AddressServiceImpl addressService) {
+        this.addressService = addressService;
     }
 
     @GetMapping("/{address-id}")
@@ -25,8 +26,8 @@ public class AddressController {
     @Operation(summary = "Retrieve an address by it's id", responses = {
             @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Address.class)))
     })
-    public Optional<Address> getAddressById(@PathVariable("address-id") String id) {
-        var address = addressRepository.findById(id);
+    public Optional<Address> getAddressById(@PathVariable("address-id") int id) {
+        var address = addressService.findById(id);
         if (address.isPresent()) {
             return address;
         } else {
