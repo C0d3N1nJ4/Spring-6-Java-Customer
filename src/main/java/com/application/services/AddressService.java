@@ -8,6 +8,6 @@ import java.util.Optional;
 @Service
 public interface AddressService {
 
-    Optional<Address> findById(int id);
+    Optional<Address> findById(String id);
 
 }
