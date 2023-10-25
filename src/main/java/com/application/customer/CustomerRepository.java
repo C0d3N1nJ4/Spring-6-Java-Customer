@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     List<Customer> findAll();
 
-    List<Customer> getCustomerByStatus(String status);
+    List<Customer> findCustomersByStatus(String status);
 
     Optional<Customer> findCustomerByAddress_Id(String addressId);
 }

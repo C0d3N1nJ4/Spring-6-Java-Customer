@@ -19,13 +19,13 @@ public class CustomerTests {
 
     @Test
     public void verifyCustomerStatusActive() {
-        List<Customer> customers = customerRepository.getCustomerByStatus("ACTIVE");
+        List<Customer> customers = customerRepository.findCustomersByStatus("ACTIVE");
         assert customers.size() == 2;
     }
 
     @Test
     public void verifyCustomerStatusInactive() {
-        List<Customer> customers = customerRepository.getCustomerByStatus("INACTIVE");
+        List<Customer> customers = customerRepository.findCustomersByStatus("INACTIVE");
         assert customers.size() == 2;
     }
 
