@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getCustomerByStatus(String status) {
-        return customerRepository.getCustomerByStatus(status);
+        return customerRepository.findCustomersByStatus(status);
     }
 
     @Override
