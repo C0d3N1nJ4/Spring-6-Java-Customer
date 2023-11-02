@@ -1,5 +1,5 @@
 # Customer
-This Spring demo project uses the following spring modules :
+This Spring demo project uses the following libraries and frameworks :
 1. Data JPA
 2. Web MVC
 3. H2
