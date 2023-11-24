@@ -1,8 +1,8 @@
 # Customer
 This Spring demo project uses the following libraries and frameworks :
 1. Data JPA
-2. Web MVC
-3. H2
+2. Spring Web MVC
+3. H2 in-memory database
 4. Actuator
 5. Swagger
 
