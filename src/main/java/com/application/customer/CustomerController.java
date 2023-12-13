@@ -2,6 +2,7 @@ package com.application.customer;
 import com.application.exceptions.CustomerNotFoundException;
 import com.application.exceptions.StatusNotFoundException;
 import com.application.services.CustomerService;
+import com.application.services.CustomerServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,9 +18,9 @@ import java.util.Optional;
 @RequestMapping("/customers")
 public class CustomerController {
 
-    private final CustomerService customerService;
+    private final CustomerServiceImpl customerService;
 
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(CustomerServiceImpl customerService) {
         this.customerService = customerService;
     }
 
