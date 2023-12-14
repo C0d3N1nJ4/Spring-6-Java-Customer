@@ -28,4 +28,14 @@ public class AddressController {
     public Optional<Address> getAddressById(@PathVariable("address-id") String id) {
         return addressService.findById(id);
     }
+
+    @PostMapping
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create an address", responses = {
+            @ApiResponse(description = "Successful Operation", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Address.class)))
+    })
+    public Address createAddress(@RequestBody Address address) {
+        return addressService.create(address);
+    }
 }

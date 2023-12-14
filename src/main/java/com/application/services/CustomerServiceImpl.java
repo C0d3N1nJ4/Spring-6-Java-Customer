@@ -1,5 +1,7 @@
 package com.application.services;
 
+import com.application.address.Address;
+import com.application.address.AddressService;
 import com.application.customer.Customer;
 import com.application.customer.CustomerRepository;
 import org.springframework.stereotype.Service;
@@ -12,8 +14,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
+    private final AddressService addressService;
+
+    public CustomerServiceImpl(CustomerRepository customerRepository, AddressService addressService) {
         this.customerRepository = customerRepository;
+        this.addressService = addressService;
     }
 
     @Override
@@ -44,6 +49,23 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Optional<Customer> findCustomerByAddress_Id(String addressId) {
         return customerRepository.findCustomerByAddress_Id(addressId);
+    }
+
+    @Override
+    public Customer saveCustomerWithAddress(Customer customer, String addressId) {
+
+        Address address = addressService.findById(addressId).orElseThrow(() -> new RuntimeException("Address not found"));
+
+        if (customerRepository.existsById(customer.getId())) {
+            throw new RuntimeException("Customer already exists");
+        } else {
+            if (address != null) {
+                customer.setAddressId(addressId);
+                return customerRepository.save(customer);
+            } else {
+                throw new RuntimeException("Address not found");
+            }
+        }
     }
 
 

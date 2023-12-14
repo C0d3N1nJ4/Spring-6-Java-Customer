@@ -28,4 +28,9 @@ public class AddressServiceImpl implements AddressService {
         }
     }
 
+    @Override
+    public Address create(Address address) {
+        return addressRepository.save(address);
+    }
+
 }
