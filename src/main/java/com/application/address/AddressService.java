@@ -10,4 +10,6 @@ public interface AddressService {
 
     Optional<Address> findById(String id);
 
+    Address create(Address address);
+
 }

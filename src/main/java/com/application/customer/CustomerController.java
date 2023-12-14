@@ -78,4 +78,14 @@ public class CustomerController {
             return customerService.findCustomerByAddress_Id(addressId);
     }
 
+    @PostMapping("/address/{address-id}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create a new customer record with address", responses = {
+            @ApiResponse(description = "Successful Operation", responseCode = "201", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class)))
+    })
+    public Customer saveCustomerWithAddress(@RequestBody Customer customer, @PathVariable("address-id") String addressId) {
+        return customerService.saveCustomerWithAddress(customer, addressId);
+    }
+
 }

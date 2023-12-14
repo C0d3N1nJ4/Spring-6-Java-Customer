@@ -21,4 +21,6 @@ public class Customer {
     @OneToOne
     private Contact contact;
 
-   }
+    public void setAddressId(String addressId) {
+    }
+}

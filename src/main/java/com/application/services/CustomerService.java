@@ -20,4 +20,6 @@ public interface CustomerService {
     Customer save(Customer customer);
 
     Optional<Customer> findCustomerByAddress_Id(String addressId);
+
+    Customer saveCustomerWithAddress(Customer customer, String addressId);
 }
