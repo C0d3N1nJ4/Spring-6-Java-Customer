@@ -38,7 +38,7 @@ public class CustomerController {
     @Operation(summary = "Retrieve a customer by it's id", responses = {
             @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Customer.class)))
     })
-    public Optional<Customer> getCustomerById(@PathVariable int id) {
+    public Optional<Customer> getCustomerById(@PathVariable String id) {
         if (customerService.existsById(id)) {
             return customerService.findById(id);
         } else {

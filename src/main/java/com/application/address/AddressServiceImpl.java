@@ -33,4 +33,7 @@ public class AddressServiceImpl implements AddressService {
         return addressRepository.save(address);
     }
 
+    public Iterable<Address> getAddressByCity(String city) {
+        return addressRepository.findAddressByCity(city);
+    }
 }

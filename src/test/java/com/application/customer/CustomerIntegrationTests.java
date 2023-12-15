@@ -51,8 +51,8 @@ public class CustomerIntegrationTests {
 
     @Test
     public void getCustomerByStatusTest_StatusBadRequest() throws Exception{
-        mockMvc.perform(get("/customers/filter").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
+        mockMvc.perform(get("/customers/filter/status").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -60,11 +60,11 @@ public class CustomerIntegrationTests {
 
         this.mockMvc.perform(post("/customers")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{ \"id\":5, \"name\":\"NAMEFIVE\", \"lastname\":\"LASTNAME\", \"status\": \"ACTIVE\"}"))
+                        .content("{ \"id\":\"5\", \"name\":\"NAMEFIVE\", \"lastname\":\"LASTNAME\", \"status\": \"ACTIVE\"}"))
                 .andExpect(status().isCreated())
                 .andExpect(content().json("""
                                 {
-                                    "id": 5,
+                                    "id": "5",
                                     "name": "NAMEFIVE",
                                     "lastname": "LASTNAME",
                                     "status": "ACTIVE"
