@@ -38,4 +38,16 @@ public class AddressController {
     public Address createAddress(@RequestBody Address address) {
         return addressService.create(address);
     }
+
+    @GetMapping("/filter/city/{city}")
+    @Operation(summary = "Retrieve an address by city", responses = {
+            @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Address.class)))
+    })
+    public Iterable<Address> getAddressByCity(@PathVariable("city") String city) {
+        if (city == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+        } else {
+            return addressService.getAddressByCity(city);
+        }
+    }
 }

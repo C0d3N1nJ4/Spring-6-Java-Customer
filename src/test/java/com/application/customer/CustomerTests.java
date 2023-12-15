@@ -31,13 +31,13 @@ public class CustomerTests {
 
     @Test
     public void testCustomerById() {
-        Customer customer = customerRepository.findById(1).get();
+        Customer customer = customerRepository.findById("1").get();
         assert customer.getName().equals("NAMEONE");
     }
 
     @Test
     public void testCustomerByIdNotFound() {
-        Customer customer = customerRepository.findById(5).orElse(null);
+        Customer customer = customerRepository.findById("5").orElse(null);
         assert customer == null;
     }
 

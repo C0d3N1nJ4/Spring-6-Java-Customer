@@ -27,12 +27,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public boolean existsById(int id) {
+    public boolean existsById(String id) {
         return customerRepository.existsById(id);
     }
 
     @Override
-    public Optional<Customer> findById(int id) {
+    public Optional<Customer> findById(String id) {
         return customerRepository.findById(id);
     }
 
@@ -60,7 +60,7 @@ public class CustomerServiceImpl implements CustomerService {
             throw new RuntimeException("Customer already exists");
         } else {
             if (address != null) {
-                customer.setAddressId(addressId);
+                //customer.setAddressId(addressId);
                 return customerRepository.save(customer);
             } else {
                 throw new RuntimeException("Address not found");

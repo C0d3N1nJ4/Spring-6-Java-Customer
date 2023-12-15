@@ -11,9 +11,9 @@ public interface CustomerService {
 
     Iterable<Customer> findAll();
 
-    boolean existsById(int id);
+    boolean existsById(String id);
 
-    Optional<Customer> findById(int id);
+    Optional<Customer> findById(String id);
 
     List<Customer> getCustomerByStatus(String status);
 

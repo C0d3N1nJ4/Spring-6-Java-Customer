@@ -11,6 +11,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -40,5 +42,44 @@ public class AddressIntegrationTests {
     public void getAddressById_StatusNotFound() throws Exception{
         mockMvc.perform(get("/address/66").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted());
+    }
+
+    @Test
+    public void getAddressByCity_StatusOK() throws Exception{
+        mockMvc.perform(get("/address/filter/city/Chicago").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getAddressByCity_StatusNOTFOUND() throws Exception{
+        mockMvc.perform(get("/address/filter/city/TEST").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+    }
+
+    @Test
+    public void saveAddress_StatusCREATED() throws Exception{
+        this.mockMvc.perform(post("/customers")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                    "id": "6",
+                                    "street": "STREETSIX",
+                                    "number": "6",
+                                    "suburb": "PAULSHOF",
+                                    "city": "SANDTON",
+                                    "postalCode": "1234"
+                                }"""))
+                .andExpect(status().isCreated());
+//                .andExpect(content().json("""
+//                                {
+//                                    "id": "6",
+//                                    "street": "STREETSIX",
+//                                    "number": "6",
+//                                    "suburb": "PAULSHOF",
+//                                    "city": "SANDTON",
+//                                    "postalCode": "1234"
+//                                }"""));
+
     }
 }
