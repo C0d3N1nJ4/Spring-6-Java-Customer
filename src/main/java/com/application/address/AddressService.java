@@ -1,6 +1,5 @@
 package com.application.address;
 
-import com.application.address.Address;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,4 +11,5 @@ public interface AddressService {
 
     Address create(Address address);
 
+    boolean existsById(String id);
 }

@@ -38,10 +38,9 @@ public class AddressIntegrationTests {
     }
 
     @Test
-    @Disabled
     public void getAddressById_StatusNotFound() throws Exception{
         mockMvc.perform(get("/address/66").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isAccepted());
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -51,7 +50,7 @@ public class AddressIntegrationTests {
     }
 
     @Test
-    public void getAddressByCity_StatusNOTFOUND() throws Exception{
+    public void getAddressByCity_StatusOK_EmptyList() throws Exception{
         mockMvc.perform(get("/address/filter/city/TEST").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[]"));

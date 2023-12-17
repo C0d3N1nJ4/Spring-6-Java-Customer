@@ -44,6 +44,13 @@ public class CustomerIntegrationTests {
     }
 
     @Test
+    public void getCustomerByIdTest_StatusNotFound() throws Exception{
+        mockMvc.perform(get("/customers/100").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+
+    }
+
+    @Test
     public void getCustomerByStatusTest_StatusOK() throws Exception{
         mockMvc.perform(get("/customers/filter/ACTIVE").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
