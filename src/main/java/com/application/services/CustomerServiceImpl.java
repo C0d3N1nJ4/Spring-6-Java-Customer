@@ -54,7 +54,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer saveCustomerWithAddress(Customer customer, String addressId) {
 
-        Address address = addressService.findById(addressId).orElseThrow(() -> new RuntimeException("Address not found"));
+        Optional<Address> address = addressService.findById(addressId);
 
         if (customerRepository.existsById(customer.getId())) {
             throw new RuntimeException("Customer already exists");

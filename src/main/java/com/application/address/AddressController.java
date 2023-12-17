@@ -1,5 +1,6 @@
 package com.application.address;
 
+import com.application.exceptions.AddressNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,8 +16,11 @@ public class AddressController {
 
     private final AddressServiceImpl addressService;
 
-    public AddressController(AddressServiceImpl addressService) {
+    private final AddressRepository addressRepo;
+
+    public AddressController(AddressServiceImpl addressService, AddressRepository addressRepo) {
         this.addressService = addressService;
+        this.addressRepo = addressRepo;
     }
 
     @GetMapping("/{address-id}")
@@ -26,7 +30,7 @@ public class AddressController {
             @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Address.class)))
     })
     public Optional<Address> getAddressById(@PathVariable("address-id") String id) {
-        return addressService.findById(id);
+            return addressService.findById(id);
     }
 
     @PostMapping
