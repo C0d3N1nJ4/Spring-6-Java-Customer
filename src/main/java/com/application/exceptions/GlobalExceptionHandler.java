@@ -23,4 +23,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(AddressNotFoundException.class)
+    ProblemDetail handleAddressNotFoundException(AddressNotFoundException e) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+        problemDetail.setTitle("Address not found");
+        return problemDetail;
+    }
+
 }
