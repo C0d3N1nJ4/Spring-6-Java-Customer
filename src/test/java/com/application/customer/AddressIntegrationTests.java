@@ -40,7 +40,7 @@ public class AddressIntegrationTests {
     @Test
     public void getAddressById_StatusNotFound() throws Exception{
         mockMvc.perform(get("/address/66").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isNotFound());
     }
 
     @Test

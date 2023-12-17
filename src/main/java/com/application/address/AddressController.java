@@ -1,6 +1,7 @@
 package com.application.address;
 
 import com.application.exceptions.AddressNotFoundException;
+import com.application.exceptions.CustomerNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -30,7 +31,11 @@ public class AddressController {
             @ApiResponse(description = "Successful Operation", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Address.class)))
     })
     public Optional<Address> getAddressById(@PathVariable("address-id") String id) {
+        if (addressService.existsById(id)) {
             return addressService.findById(id);
+        } else {
+            throw new AddressNotFoundException(id);
+        }
     }
 
     @PostMapping
