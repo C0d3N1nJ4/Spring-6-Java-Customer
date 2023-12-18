@@ -14,13 +14,13 @@ public class CustomerTests {
     @Test
     public void verifyCustomerCount() {
         List<Customer> customers = customerRepository.findAll();
-        assert customers.size() == 4;
+        assert customers.size() == 6;
     }
 
     @Test
     public void verifyCustomerStatusActive() {
         List<Customer> customers = customerRepository.findCustomersByStatus("ACTIVE");
-        assert customers.size() == 2;
+        assert customers.size() == 3;
     }
 
     @Test
@@ -37,7 +37,7 @@ public class CustomerTests {
 
     @Test
     public void testCustomerByIdNotFound() {
-        Customer customer = customerRepository.findById("5").orElse(null);
+        Customer customer = customerRepository.findById("9").orElse(null);
         assert customer == null;
     }
 
