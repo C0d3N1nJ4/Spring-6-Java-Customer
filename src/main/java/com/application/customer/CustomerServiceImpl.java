@@ -1,9 +1,10 @@
-package com.application.services;
+package com.application.customer;
 
 import com.application.address.Address;
 import com.application.address.AddressService;
 import com.application.customer.Customer;
 import com.application.customer.CustomerRepository;
+import com.application.customer.CustomerService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
