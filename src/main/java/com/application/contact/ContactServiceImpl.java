@@ -1,11 +1,21 @@
 package com.application.contact;
 
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
 public class ContactServiceImpl implements ContactService{
 
     private final ContactRepository contactRepository;
 
     public ContactServiceImpl(ContactRepository contactRepository) {
         this.contactRepository = contactRepository;
+    }
+
+    @Override
+    public List<Contact> findAll() {
+        return contactRepository.findAll();
     }
 
     @Override
