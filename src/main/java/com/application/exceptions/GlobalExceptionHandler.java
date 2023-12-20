@@ -30,4 +30,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(ContactNotFoundException.class)
+    ProblemDetail handleContactNotFoundException(ContactNotFoundException e) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+        problemDetail.setTitle("Contact not found");
+        return problemDetail;
+    }
+
 }

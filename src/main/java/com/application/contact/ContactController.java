@@ -1,5 +1,6 @@
 package com.application.contact;
 
+import com.application.exceptions.ContactNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,4 +22,15 @@ public class ContactController {
     public List<Contact> getContacts() {
         return contactService.findAll();
     }
+
+    @GetMapping("/{id}")
+    public Contact getContactById(@PathVariable String id) {
+        if (contactService.existsById(id)) {
+            return contactService.findById(id);
+        } else {
+            throw new ContactNotFoundException(id);
+        }
+    }
+
+
 }
