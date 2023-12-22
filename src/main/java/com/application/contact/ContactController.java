@@ -1,14 +1,13 @@
 package com.application.contact;
 
 import com.application.exceptions.ContactNotFoundException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/contacts")
+@RequestMapping("/contact")
 public class ContactController {
 
     private final ContactServiceImpl contactService;
@@ -30,6 +29,13 @@ public class ContactController {
         } else {
             throw new ContactNotFoundException(id);
         }
+    }
+
+    @PostMapping
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    public Contact createContact(@RequestBody Contact contact) {
+        return contactService.create(contact);
     }
 
 
