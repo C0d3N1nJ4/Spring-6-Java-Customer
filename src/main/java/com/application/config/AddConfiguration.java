@@ -9,8 +9,6 @@ public class AddConfiguration {
 
     @Bean
     public CommandLineRunner commandLineRunner() {
-        return args -> {
-            System.out.println("Hello World");
-        };
+        return args -> System.out.println("Hello Customer Admin");
     }
 }

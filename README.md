@@ -13,9 +13,12 @@ The following endpoints are available for application monitoring :
 
 http://localhost:8080/actuator
 
-# Swagger 
+# API Swagger 
 
-The swagger documentation is available at the following URL : http://localhost:8080/swagger-ui.html
+The swagger documentation for the api endpoints is available at the following URL : http://localhost:8080/swagger-ui.html
 
+# Domain model
+
+The domain model is composed of three entities : Customer, Address and Contact. A Customer can have one address and one contact.
 
 
