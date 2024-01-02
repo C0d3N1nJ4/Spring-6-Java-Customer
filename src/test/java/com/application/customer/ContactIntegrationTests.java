@@ -11,11 +11,10 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-public class ContractIntegrationTests {
+public class ContactIntegrationTests {
 
     private MockMvc mockMvc;
 
@@ -31,27 +30,27 @@ public class ContractIntegrationTests {
 
     @Test
     public void getAllContactsTest_StatusOK() throws Exception{
-        mockMvc.perform(get("/contacts").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/contact").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
     }
 
     @Test
     public void getContactById_StatusOK() throws Exception{
-        mockMvc.perform(get("/contacts/1").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/contact/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void getContactById_StatusNotFound() throws Exception{
-        mockMvc.perform(get("/contacts/66").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/contact/66").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
 
 
     @Test
     public void saveContact_StatusCREATED() throws Exception{
-        this.mockMvc.perform(post("/contacts")
+        this.mockMvc.perform(post("/contact")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
