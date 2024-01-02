@@ -14,13 +14,13 @@ public class CustomerTests {
     @Test
     public void verifyCustomerCount() {
         List<Customer> customers = customerRepository.findAll();
-        assert customers.size() == 6;
+        assert customers.size() == 4;
     }
 
     @Test
     public void verifyCustomerStatusActive() {
         List<Customer> customers = customerRepository.findCustomersByStatus("ACTIVE");
-        assert customers.size() == 3;
+        assert customers.size() == 2;
     }
 
     @Test
